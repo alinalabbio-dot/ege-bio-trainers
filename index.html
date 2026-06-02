@@ -16,7 +16,9 @@
     --orange:#f97316;
     --shadow:0 18px 45px rgba(31,41,55,.10);
   }
+
   *{box-sizing:border-box}
+
   body{
     margin:0;
     min-height:100vh;
@@ -28,11 +30,13 @@
       radial-gradient(circle at 50% 100%, rgba(0,167,167,.12), transparent 34%),
       var(--bg);
   }
+
   .wrap{
     max-width:980px;
     margin:0 auto;
     padding:28px;
   }
+
   .hero{
     background:linear-gradient(135deg,#ffffff 0%,#f4f1ff 48%,#fff3e8 100%);
     border:1px solid rgba(255,255,255,.85);
@@ -42,6 +46,7 @@
     position:relative;
     overflow:hidden;
   }
+
   .hero:after{
     content:"ЕГЭ";
     position:absolute;
@@ -52,7 +57,9 @@
     font-weight:950;
     letter-spacing:-.08em;
     color:rgba(31,41,55,.055);
+    pointer-events:none;
   }
+
   .badge{
     display:inline-flex;
     padding:8px 12px;
@@ -64,12 +71,14 @@
     font-weight:800;
     margin-bottom:14px;
   }
+
   h1{
     margin:0 0 10px;
     font-size:clamp(30px,5vw,48px);
     letter-spacing:-.04em;
     max-width:720px;
   }
+
   p{
     margin:0;
     color:var(--muted);
@@ -77,76 +86,104 @@
     line-height:1.55;
     max-width:720px;
   }
+
   .menu{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:18px;
     margin-top:22px;
   }
-  .card{
-    display:block;
+
+  .trainer-card{
     text-decoration:none;
     color:inherit;
     background:var(--card);
     border:1px solid var(--line);
     border-radius:24px;
     box-shadow:0 12px 28px rgba(31,41,55,.07);
-    padding:22px;
+    padding:24px;
+    min-height:285px;
+    display:flex;
+    flex-direction:column;
     transition:.15s ease;
-    min-height:230px;
-    position:relative;
-    overflow:hidden;
   }
-  .card:hover{
+
+  .trainer-card:hover{
     transform:translateY(-3px);
     box-shadow:0 18px 40px rgba(31,41,55,.11);
   }
-  .card .num{
-    width:48px;
-    height:48px;
+
+  .num{
+    width:54px;
+    height:54px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:16px;
+    border-radius:18px;
     color:#fff;
     font-weight:950;
-    font-size:24px;
-    margin-bottom:16px;
+    font-size:26px;
+    margin-bottom:18px;
   }
-  .card.one .num{background:linear-gradient(135deg,var(--violet),var(--teal))}
-  .card.two .num{background:linear-gradient(135deg,var(--orange),var(--teal))}
-  .card h2{
-    margin:0 0 8px;
-    font-size:22px;
+
+  .trainer-card.one .num{
+    background:linear-gradient(135deg,var(--violet),var(--teal));
+  }
+
+  .trainer-card.two .num{
+    background:linear-gradient(135deg,var(--orange),var(--teal));
+  }
+
+  .trainer-card h2{
+    margin:0 0 10px;
+    font-size:24px;
     letter-spacing:-.02em;
   }
-  .card p{
-    font-size:15.5px;
-    margin-bottom:16px;
+
+  .trainer-card p{
+    font-size:16px;
+    line-height:1.55;
   }
+
+  .card-footer{
+    margin-top:auto;
+    padding-top:22px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
   .tags{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
-    margin-top:auto;
+    min-width:0;
+    flex:1 1 260px;
   }
+
   .tag{
     border-radius:999px;
     border:1px solid var(--line);
     background:#f9fafb;
     color:#4b5563;
-    padding:6px 9px;
+    padding:6px 10px;
     font-size:12.5px;
     font-weight:750;
+    white-space:nowrap;
   }
-  .open{
-    position:absolute;
-    right:20px;
-    bottom:18px;
+
+  .open-link{
+    flex:0 0 auto;
+    margin-left:auto;
+    color:#4b5563;
     font-weight:900;
-    color:#374151;
-    opacity:.7;
+    opacity:.82;
+    white-space:nowrap;
+    padding-bottom:4px;
   }
+
   .author{
     margin-top:20px;
     text-align:right;
@@ -156,11 +193,28 @@
     font-weight:400;
     letter-spacing:.01em;
   }
-@media(max-width:760px){
+
+  @media(max-width:760px){
     .wrap{padding:16px}
     .hero{padding:22px;border-radius:24px}
-    .menu{grid-template-columns:1fr}
     .hero:after{font-size:70px;right:12px;top:10px}
+    .menu{grid-template-columns:1fr}
+    .trainer-card{min-height:auto;padding:22px}
+    .card-footer{padding-top:20px}
+    .tags{flex-basis:220px}
+  }
+
+  @media(max-width:420px){
+    .card-footer{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .tags{flex-basis:auto}
+    .open-link{
+      margin-left:0;
+      align-self:flex-end;
+    }
   }
 </style>
 </head>
@@ -173,31 +227,38 @@
     </section>
 
     <section class="menu" aria-label="Меню тренажёров">
-      <a class="card one" href="zadanie-1.html">
+      <a class="trainer-card one" href="zadanie-1.html">
         <div class="num">1</div>
         <h2>Задание 1</h2>
         <p>Таблицы с пропущенным термином: биологические науки, методы, уровни организации живого и свойства живого.</p>
-        <div class="tags">
-          <span class="tag">термины</span>
-          <span class="tag">таблицы</span>
-          <span class="tag">быстрый формат</span>
+
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">термины</span>
+            <span class="tag">таблицы</span>
+            <span class="tag">быстрый формат</span>
+          </div>
+          <div class="open-link">Открыть →</div>
         </div>
-        <div class="open">Открыть →</div>
       </a>
 
-      <a class="card two" href="zadanie-2.html">
+      <a class="trainer-card two" href="zadanie-2.html">
         <div class="num">2</div>
         <h2>Задание 2</h2>
         <p>Эксперимент и прогноз изменений: нужно определить, увеличатся, уменьшатся или не изменятся два показателя.</p>
-        <div class="tags">
-          <span class="tag">эксперимент</span>
-          <span class="tag">1 / 2 / 3</span>
-          <span class="tag">причины и следствия</span>
+
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">эксперимент</span>
+            <span class="tag">прогноз изменений</span>
+            <span class="tag">причины и следствия</span>
+          </div>
+          <div class="open-link">Открыть →</div>
         </div>
-        <div class="open">Открыть →</div>
       </a>
     </section>
-<div class="author">Подготовила: Алина Исакова</div>
+
+    <div class="author">Подготовила: Алина Исакова</div>
   </div>
 </body>
 </html>
