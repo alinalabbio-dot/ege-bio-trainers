@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ЕГЭ-2026 Биология — Задание 2: быстрый тренажёр</title>
+<style>
+  :root{
+    --bg:#fff8f1;
+    --card:#ffffff;
+    --ink:#172033;
+    --muted:#667085;
+    --line:#e4e7ec;
+    --accent:#f97316;
+    --accent2:#14b8a6;
+    --blue:#0ea5e9;
+    --orange:#f97316;
+    --violet:#7c3aed;
+    --good:#067647;
+    --bad:#b42318;
+    --warn:#b54708;
+    --soft:#fff3e8;
+    --soft2:#e6fffb;
+    --shadow:0 18px 46px rgba(23,32,51,.10);
+    --radius:24px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 0%, rgba(249,115,22,.20), transparent 35%),
+      radial-gradient(circle at 90% 5%, rgba(20,184,166,.18), transparent 34%),
+      var(--bg);
+    min-height:100vh;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:24px}
+  .hero{
+    background:linear-gradient(135deg,#ffffff 0%,#fff3e8 46%,#e6fffb 100%);
+    border:1px solid rgba(255,255,255,.85);
+    border-radius:30px;
+    box-shadow:var(--shadow);
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero:after{
+    content:"2";
+    position:absolute;
+    right:26px;
+    top:4px;
+    font-size:170px;
+    line-height:1;
+    font-weight:950;
+    color:rgba(249,115,22,.11);
+  }
+  h1{margin:0 0 8px;font-size:clamp(26px,4vw,42px);letter-spacing:-.035em}
+  h2{margin:0 0 14px;font-size:24px}
+  h3{margin:0 0 10px;font-size:18px}
+  p{line-height:1.55}
+  .sub{font-size:17px;color:var(--muted);max-width:780px;margin:0}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .pill{
+    background:rgba(255,255,255,.75);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 12px;
+    font-size:14px;
+    color:#344054;
+  }
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+  .mini{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px;
+    box-shadow:0 8px 18px rgba(23,32,51,.05);
+  }
+  .mini b{display:block;margin-bottom:6px}
+  .mini span{font-size:13.5px;color:var(--muted);line-height:1.42}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    margin-top:18px;
+  }
+  .start-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:18px}
+  label{font-weight:800;display:block;margin-bottom:8px}
+  input[type=text]{
+    width:100%;
+    border:1.5px solid #d0d5dd;
+    border-radius:14px;
+    padding:13px 14px;
+    font-size:16px;
+    outline:none;
+    background:#fff;
+  }
+  input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(249,115,22,.14)}
+  .mode{
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:10px;
+    cursor:pointer;
+    background:#fff;
+    transition:.15s ease;
+  }
+  .mode:hover{border-color:#fdba74;transform:translateY(-1px)}
+  .mode.active{border-color:var(--accent);background:var(--soft)}
+  .mode small{display:block;color:var(--muted);margin-top:5px;line-height:1.35}
+  button{
+    border:0;
+    border-radius:14px;
+    padding:13px 16px;
+    font-weight:850;
+    font-size:15px;
+    cursor:pointer;
+    transition:.15s ease;
+  }
+  .primary{background:var(--accent);color:#fff;box-shadow:0 10px 20px rgba(249,115,22,.24)}
+  .primary:hover{transform:translateY(-1px)}
+  .secondary{background:#f2f4f7;color:#101828;border:1px solid #e4e7ec}
+  .ghost{background:#fff;color:#344054;border:1px solid #d0d5dd}
+  .danger{background:#fff1f3;color:#9f1239;border:1px solid #fecdd3}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .hidden{display:none!important}
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .progress-wrap{flex:1;min-width:240px}
+  .progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:7px}
+  .progress{height:10px;background:#eef0f4;border-radius:999px;overflow:hidden}
+  .progress div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
+  .scorebox{background:#f9fafb;border:1px solid var(--line);padding:10px 12px;border-radius:14px;font-weight:850}
+  .qtag{
+    display:inline-flex;
+    align-items:center;
+    background:var(--soft);
+    color:#4338ca;
+    border-radius:999px;
+    padding:7px 11px;
+    font-weight:850;
+    font-size:13px;
+    margin-bottom:12px;
+  }
+  .qtag.plants{background:#ecfdf3;color:#067647}
+  .qtag.human{background:#eff8ff;color:#026aa2}
+  .qtag.microbes{background:#fff7ed;color:#c2410c}
+  .qtag.energy{background:#f4f3ff;color:#6d28d9}
+  .tasktext{font-size:17px;margin:0 0 14px}
+  .scenario{
+    background:#f8fafc;
+    border:1px solid #e4e7ec;
+    border-radius:18px;
+    padding:16px;
+    margin:12px 0 16px;
+    font-size:17px;
+    line-height:1.55;
+  }
+  table.kim{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0 16px;
+    overflow:hidden;
+    border-radius:16px;
+    border-style:hidden;
+    box-shadow:0 0 0 1px #d0d5dd;
+  }
+  .kim th,.kim td{
+    border:1px solid #d0d5dd;
+    padding:13px 14px;
+    text-align:left;
+    vertical-align:middle;
+  }
+  .kim th{background:#f8fafc;font-weight:900;text-align:center}
+  .kim td:first-child{font-weight:800;width:45%}
+  .choiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .indicator{
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:14px;
+    background:#fff;
+  }
+  .indicator h3{font-size:16px;margin:0 0 10px}
+  .choiceBtns{display:grid;grid-template-columns:1fr;gap:8px}
+  .choice{
+    text-align:left;
+    background:#fff;
+    color:#344054;
+    border:1px solid #d0d5dd;
+    box-shadow:none;
+    font-weight:800;
+    padding:11px 12px;
+  }
+  .choice:hover{border-color:#aba7ff;background:#fbfaff}
+  .choice.selected{border-color:var(--accent);background:var(--soft);color:#312e81}
+  .choice.good{border-color:#86efac;background:#f0fdf4;color:#14532d}
+  .choice.bad{border-color:#fecdd3;background:#fff1f2;color:#7f1d1d}
+  .answerPreview{
+    margin-top:12px;
+    background:#f9fafb;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 12px;
+    color:#475467;
+    font-size:14px;
+  }
+  .feedback{
+    border-radius:16px;
+    padding:14px;
+    margin-top:14px;
+    border:1px solid;
+  }
+  .ok{background:#f0fdf4;border-color:#bbf7d0;color:#14532d}
+  .no{background:#fff1f2;border-color:#fecdd3;color:#7f1d1d}
+  .hint{
+    background:#fffbeb;
+    border:1px solid #fde68a;
+    color:#78350f;
+    border-radius:16px;
+    padding:13px;
+    margin-top:12px;
+    font-size:14px;
+  }
+  .theory{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+  details{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px 14px;
+  }
+  summary{
+    cursor:pointer;
+    font-weight:900;
+  }
+  .cheat{
+    padding-left:18px;
+    margin:12px 0 0;
+  }
+  .cheat li{margin:0 0 8px;line-height:1.35}
+  .result{
+    display:grid;
+    grid-template-columns:.75fr 1.25fr;
+    gap:16px;
+  }
+  .bigscore{
+    background:linear-gradient(135deg,#fff3e8,#e6fffb);
+    border-radius:22px;
+    padding:20px;
+    text-align:center;
+    border:1px solid #fed7aa;
+  }
+  .bigscore .num{font-size:56px;font-weight:950;letter-spacing:-.05em}
+  .mistakes{max-height:560px;overflow:auto;padding-right:6px}
+  .mistake{
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:13px;
+    margin-bottom:10px;
+    background:#fff;
+  }
+  .mistake b{display:block;margin-bottom:6px}
+  .muted{color:var(--muted)}
+  .small{font-size:13px}
+  .legend{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:10px 0 0;
+  }
+  .legend span{
+    border:1px solid #d0d5dd;
+    background:#fff;
+    border-radius:999px;
+    padding:6px 10px;
+    font-weight:800;
+    font-size:13px;
+  }
+
+  .taskBadge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(249,115,22,.28);
+    color:#c2410c;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.01em;
+  }
+  .authorNote{
+    margin-top:20px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    text-align:right;
+    color:#667085;
+    opacity:.52;
+    font-size:12.5px;
+    font-weight:400;
+    letter-spacing:.01em;
+  }
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:22px;
+    transform:translateX(-50%);
+    background:#101828;
+    color:#fff;
+    border-radius:999px;
+    padding:11px 15px;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+    z-index:10;
+  }
+  @media(max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .start-grid,.result,.choiceGrid{grid-template-columns:1fr}
+    .theory{grid-template-columns:1fr}
+  }
+  @media(max-width:540px){
+    .wrap{padding:14px}
+    .hero,.card{padding:18px;border-radius:20px}
+    .grid{grid-template-columns:1fr}
+    .kim th,.kim td{padding:10px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="taskBadge">Задание 2 · эксперимент и прогноз изменений</div>
+    <h1>ЕГЭ-2026. Биология. Задание 2</h1>
+    <p class="sub">Тренажёр на прогноз результата опыта: расширенные формулировки в стиле ЕГЭ, два показателя и ответ двумя цифрами.</p>
+    <div class="pillrow">
+      <span class="pill">1 — увеличится</span>
+      <span class="pill">2 — уменьшится</span>
+      <span class="pill">3 — не изменится</span>
+      <span class="pill">ответ двумя цифрами</span>
+      <span class="pill">отчёт для учителя</span>
+    </div>
+  </section>
+
+  <section class="grid" id="topicCards">
+    <div class="mini"><b>1. Растения</b><span>8 заданий: фотосинтез, транспирация, устьица, плазмолиз, минеральное питание.</span></div>
+    <div class="mini"><b>2. Человек и животные</b><span>8 заданий: ЧСС, сосуды, давление, скорость крови, терморегуляция, гормоны.</span></div>
+    <div class="mini"><b>3. Микроорганизмы</b><span>8 заданий: бактерии, дрожжи, брожение, антибиотики, пастеризация, условия роста.</span></div>
+    <div class="mini"><b>4. Энергетический обмен</b><span>8 заданий: гликолиз, дыхательная цепь, ATP, ферменты, субстраты, каталаза.</span></div>
+  </section>
+
+  <section class="card" id="startScreen">
+    <div class="start-grid">
+      <div>
+        <h2>Перед стартом</h2>
+        <p class="muted">В каждом вопросе есть описание опыта и две величины. Ответ состоит из двух цифр: первая цифра — для показателя А, вторая — для показателя Б.</p>
+        <div class="legend">
+          <span>1 = увеличится</span>
+          <span>2 = уменьшится</span>
+          <span>3 = не изменится</span>
+        </div>
+        <br>
+        <label for="studentName">Имя</label>
+        <input id="studentName" type="text" placeholder="Например: Маша" autocomplete="name"/>
+        <div class="btnrow">
+          <button class="secondary" id="showTheoryBtn">Открыть алгоритм</button>
+          <button class="ghost" id="sampleBtn">Показать пример</button>
+        </div>
+        <div id="sampleBox" class="hint hidden">
+          <b>Пример:</b> клетки после плазмолиза поместили в дистиллированную воду.<br>
+          А) объём цитоплазмы — <b>увеличится</b>, Б) число рибосом — <b>не изменится</b>.<br>
+          Ответ: <b>13</b>.
+        </div>
+      </div>
+      <div>
+        <h3>Режим</h3>
+        <div class="mode active" data-mode="mini">
+          <b>Мини-режим</b>
+          <small>12 заданий: по 3 из каждого блока.</small>
+        </div>
+        <div class="mode" data-mode="standard">
+          <b>Стандарт</b>
+          <small>24 задания: по 6 из каждого блока.</small>
+        </div>
+        <div class="mode" data-mode="full">
+          <b>Полная тренировка</b>
+          <small>32 задания: все 4 блока по 8 вопросов.</small>
+        </div>
+        <button class="primary" id="startBtn" style="width:100%;margin-top:8px">Начать тренировку</button>
+      </div>
+    </div>
+    <div class="authorNote">Подготовила: Алина Исакова</div>
+  </section>
+
+  <section class="card hidden" id="theoryScreen">
+    <div class="topbar">
+      <h2 style="margin:0">Алгоритм для задания 2</h2>
+      <button class="ghost" id="hideTheoryBtn">Свернуть</button>
+    </div>
+    <div class="theory">
+      <details open>
+        <summary>Как решать</summary>
+        <ol class="cheat">
+          <li>Найди, <b>что изменил экспериментатор</b>: свет, температуру, раствор, кислород, субстрат, гормон, нагрузку и т.д.</li>
+          <li>Подчеркни два показателя: <b>А</b> и <b>Б</b>.</li>
+          <li>Для каждого показателя отдельно выбери: 1 — увеличится, 2 — уменьшится, 3 — не изменится.</li>
+          <li>Не связывай показатели автоматически: объём клетки может измениться, а число рибосом — нет.</li>
+          <li>Запиши ответ двумя цифрами без пробела: сначала А, потом Б.</li>
+        </ol>
+      </details>
+
+      <details open>
+        <summary>Человек и животные: сердечно-сосудистая система</summary>
+        <ul class="cheat">
+          <li><b>ЧСС усиливают:</b> физическая нагрузка, адреналин, симпатическая нервная система, стресс, повышение температуры тела, нехватка O₂/избыток CO₂.</li>
+          <li><b>ЧСС снижают:</b> покой, парасимпатическая нервная система, ацетилхолин, сон, тренированность в состоянии покоя.</li>
+          <li><b>Давление крови</b> по ходу движения падает: аорта/артерии → артериолы → капилляры → вены. Самое высокое — в аорте и крупных артериях, самое низкое — в венах.</li>
+          <li><b>Скорость крови</b> максимальна в крупных артериях, минимальна в капиллярах, потому что их суммарная площадь сечения огромная. В венах скорость снова возрастает, но обычно ниже, чем в аорте.</li>
+          <li><b>Сужение сосудов</b> повышает сопротивление току крови и может повышать давление до места сужения; <b>расширение сосудов кожи</b> усиливает теплоотдачу.</li>
+          <li>При нагрузке обычно увеличиваются: ЧСС, минутный объём крови, кровоток в мышцах, потребление O₂, выделение CO₂.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Человек и животные: регуляция и обмен</summary>
+        <ul class="cheat">
+          <li><b>Инсулин</b> выделяется при повышении глюкозы крови; он снижает глюкозу и усиливает образование гликогена.</li>
+          <li><b>Глюкагон</b> выделяется при снижении глюкозы крови; он повышает глюкозу и усиливает распад гликогена.</li>
+          <li>На холоде: сосуды кожи сужаются, потоотделение уменьшается, теплопродукция возрастает.</li>
+          <li>В жару: сосуды кожи расширяются, потоотделение и теплоотдача увеличиваются.</li>
+          <li>После большого количества воды объём мочи увеличивается, а концентрация солей в моче обычно снижается.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Растения</summary>
+        <ul class="cheat">
+          <li><b>Свет + CO₂ + вода</b> при нормальной температуре усиливают фотосинтез до оптимума.</li>
+          <li>В темноте фотосинтез снижается, но <b>дыхание продолжается</b>.</li>
+          <li>В сухом воздухе транспирация усиливается, но при сильной засухе устьица закрываются и транспирация через них снижается.</li>
+          <li><b>Гипертонический раствор</b> вытягивает воду из клетки → объём цитоплазмы/вакуоли уменьшается, возможен плазмолиз.</li>
+          <li><b>Дистиллированная вода</b> после плазмолиза входит в клетку → объём цитоплазмы/вакуоли увеличивается.</li>
+          <li>Дефицит азота снижает синтез белков и хлорофилла; дефицит магния тоже ухудшает образование хлорофилла.</li>
+          <li>При прорастании семян усиливается дыхание и потребление кислорода.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Микроорганизмы</summary>
+        <ul class="cheat">
+          <li>Оптимальная температура и свежая питательная среда обычно увеличивают скорость деления и биомассу культуры.</li>
+          <li>Холод замедляет ферментативные реакции, обмен веществ и размножение.</li>
+          <li>Высокая температура при стерилизации уменьшает число живых микроорганизмов и разрушает многие ферменты.</li>
+          <li>Антибиотик снижает численность только <b>чувствительных</b> бактерий; устойчивые бактерии могут выживать и размножаться.</li>
+          <li>Дрожжи без кислорода при наличии глюкозы проводят спиртовое брожение → увеличиваются CO₂ и этанол.</li>
+          <li>Молочнокислые бактерии образуют молочную кислоту → pH среды снижается.</li>
+          <li>Аэробным микроорганизмам нужен кислород; без O₂ аэробное дыхание и синтез АТФ уменьшаются.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Энергетический обмен / биохимия</summary>
+        <ul class="cheat">
+          <li>Больше кислорода для аэробного дыхания → обычно больше окислительного фосфорилирования и синтеза АТФ.</li>
+          <li>Нет кислорода → аэробное дыхание падает, брожение или образование лактата могут усиливаться.</li>
+          <li>Ингибитор дыхательной цепи → меньше перенос электронов, меньше потребление O₂, меньше АТФ в митохондриях.</li>
+          <li>Больше субстрата для ненасыщенного фермента → выше скорость реакции и больше продукта за единицу времени.</li>
+          <li>Температура выше оптимума снижает активность фермента из-за денатурации; температура ниже оптимума обычно замедляет реакцию.</li>
+          <li>Активный транспорт требует АТФ: если транспорт усиливается, расход АТФ и образование АДФ увеличиваются.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Типичные ловушки</summary>
+        <ul class="cheat">
+          <li>Быстро меняются <b>объём, концентрация, скорость процесса, активность фермента, частота сокращений</b>.</li>
+          <li>Количество органоидов обычно <b>не меняется мгновенно</b>.</li>
+          <li>Если сказано «до оптимума» — процесс усиливается; если «выше оптимума» — может снижаться.</li>
+          <li>Если вопрос про концентрацию, следи: вещество может расходоваться, значит его концентрация уменьшается.</li>
+          <li>Если один показатель увеличился, второй не обязан увеличиваться тоже.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Запись ответа</summary>
+        <ul class="cheat">
+          <li>А увеличится, Б уменьшится → <b>12</b>.</li>
+          <li>А уменьшится, Б не изменится → <b>23</b>.</li>
+          <li>А не изменится, Б увеличится → <b>31</b>.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section class="card hidden" id="quizScreen">
+    <div class="topbar">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progressText">Вопрос 1 из 12</span>
+          <span id="roundText">Блок</span>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </div>
+      <div class="scorebox" id="liveScore">0 / 0</div>
+    </div>
+    <div id="questionBox"></div>
+  </section>
+
+  <section class="card hidden" id="resultScreen">
+    <h2>Результат тренировки</h2>
+    <div class="result">
+      <div class="bigscore">
+        <div class="muted" id="resName">Имя</div>
+        <div class="num" id="resPercent">0%</div>
+        <b id="resScore">0 из 0</b>
+        <p class="small muted" id="resMode">Режим</p>
+        <div class="btnrow" style="justify-content:center">
+          <button class="primary" id="copyReportBtn">Скопировать отчёт</button>
+          <button class="secondary" id="downloadReportBtn">Скачать отчёт</button>
+          <button class="ghost" id="restartBtn">Пройти ещё раз</button>
+        </div>
+      </div>
+      <div>
+        <h3>Разбор</h3>
+        <p class="muted small">В отчёт попадут выбранные ответы, правильные цифры и пояснения.</p>
+        <div class="mistakes" id="mistakesBox"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const BANK = [
+  {
+    "cat": "plants",
+    "scenario": "Экспериментатор поместил клетки кожицы лука, находившиеся в воде, в гипертонический раствор сахарозы. Через несколько минут клетки сравнили с исходным состоянием.",
+    "a": "Объём вакуоли",
+    "b": "Количество рибосом в клетке",
+    "ans": [
+      2,
+      3
+    ],
+    "exp": "В гипертоническом растворе вода выходит из клетки, поэтому вакуоль уменьшается. Количество рибосом за несколько минут не меняется."
+  },
+  {
+    "cat": "plants",
+    "scenario": "Растение, находившееся в темноте, перенесли на свет при достаточном количестве воды и углекислого газа. Через некоторое время измерили показатели фотосинтеза.",
+    "a": "Интенсивность поглощения углекислого газа листьями",
+    "b": "Скорость образования органических веществ в хлоропластах",
+    "ans": [
+      1,
+      1
+    ],
+    "exp": "Свет необходим для фотосинтеза. При достатке воды и CO₂ фотосинтез усиливается, поэтому возрастает поглощение CO₂ и синтез органических веществ."
+  },
+  {
+    "cat": "plants",
+    "scenario": "У растения при недостатке воды замыкающие клетки устьиц потеряли тургор. Показатели сравнили с состоянием нормального водоснабжения.",
+    "a": "Ширина устьичной щели",
+    "b": "Поступление углекислого газа в лист через устьица",
+    "ans": [
+      2,
+      2
+    ],
+    "exp": "При потере тургора устьица закрываются. Поэтому устьичная щель сужается и поступление CO₂ через устьица уменьшается."
+  },
+  {
+    "cat": "plants",
+    "scenario": "Взрослое растение после периода азотного голодания полили раствором нитратов. Через короткое время оценили изменения в зрелых клетках листа.",
+    "a": "Интенсивность синтеза аминокислот",
+    "b": "Количество хлоропластов в зрелой клетке листа",
+    "ans": [
+      1,
+      3
+    ],
+    "exp": "Азот нужен для синтеза аминокислот, поэтому их образование усилится. Но число хлоропластов в зрелой клетке за короткое время обычно не меняется."
+  },
+  {
+    "cat": "plants",
+    "scenario": "Зерновки пшеницы поместили в концентрированный раствор соли и сравнили их клетки с клетками зерновок, находившихся в воде.",
+    "a": "Концентрация растворённых веществ в клеточном соке",
+    "b": "Количество воды в клетках",
+    "ans": [
+      1,
+      2
+    ],
+    "exp": "В концентрированном растворе вода выходит из клеток. Воды становится меньше, а концентрация растворённых веществ в клеточном соке возрастает."
+  },
+  {
+    "cat": "plants",
+    "scenario": "Зрелый лист растения перенесли из слабого освещения на свет оптимальной интенсивности. Изменения оценили через несколько минут.",
+    "a": "Количество хлоропластов в клетках листа",
+    "b": "Скорость образования крахмала в хлоропластах",
+    "ans": [
+      3,
+      1
+    ],
+    "exp": "Свет усиливает фотосинтез и образование крахмала. Количество хлоропластов за несколько минут не увеличивается."
+  },
+  {
+    "cat": "plants",
+    "scenario": "В жаркий сухой день у растения закрылись устьица. Показатели сравнили с состоянием, когда устьица были открыты.",
+    "a": "Интенсивность транспирации через устьица",
+    "b": "Температура листовой пластинки",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "При закрытии устьиц транспирация уменьшается. Испарительное охлаждение ослабевает, поэтому температура листа может повыситься."
+  },
+  {
+    "cat": "plants",
+    "scenario": "Микропрепарат поперечного среза листа рассматривали сначала при малом увеличении, а затем заменили объектив на более сильный.",
+    "a": "Реальный размер клеток листа",
+    "b": "Количество клеток, видимых в поле зрения микроскопа",
+    "ans": [
+      3,
+      2
+    ],
+    "exp": "Увеличение микроскопа не меняет реальный размер клеток. При большем увеличении поле зрения становится меньше, поэтому видимых клеток меньше."
+  },
+  {
+    "cat": "human",
+    "scenario": "У испытуемого измерили показатели в состоянии покоя, затем он в течение 5 минут выполнял интенсивную физическую нагрузку.",
+    "a": "Частота сердечных сокращений",
+    "b": "Содержание кислорода в венозной крови, оттекающей от работающих мышц",
+    "ans": [
+      1,
+      2
+    ],
+    "exp": "При нагрузке ЧСС увеличивается. Работающие мышцы активнее забирают O₂ из крови, поэтому в венозной крови от них кислорода становится меньше."
+  },
+  {
+    "cat": "human",
+    "scenario": "Сравнили показатели крови при её движении из капилляров большого круга кровообращения в вены.",
+    "a": "Давление крови",
+    "b": "Скорость движения крови",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "По ходу сосудистого русла давление падает. После капилляров суммарная площадь сечения сосудов уменьшается, поэтому скорость крови возрастает."
+  },
+  {
+    "cat": "human",
+    "scenario": "Человек перешёл из прохладного помещения в жаркое. Через некоторое время включились механизмы терморегуляции.",
+    "a": "Диаметр кровеносных сосудов кожи",
+    "b": "Теплоотдача через кожу",
+    "ans": [
+      1,
+      1
+    ],
+    "exp": "В жаре сосуды кожи расширяются, к коже поступает больше крови, теплоотдача усиливается."
+  },
+  {
+    "cat": "human",
+    "scenario": "У человека при сильном охлаждении активировались механизмы сохранения тепла.",
+    "a": "Просвет кровеносных сосудов кожи",
+    "b": "Интенсивность потоотделения",
+    "ans": [
+      2,
+      2
+    ],
+    "exp": "На холоде сосуды кожи сужаются, чтобы уменьшить потери тепла. Потоотделение также снижается."
+  },
+  {
+    "cat": "human",
+    "scenario": "После повышения концентрации глюкозы в крови у человека усилилась секреция инсулина. Показатели оценили спустя некоторое время.",
+    "a": "Концентрация глюкозы в крови",
+    "b": "Количество эритроцитов в крови",
+    "ans": [
+      2,
+      3
+    ],
+    "exp": "Инсулин снижает концентрацию глюкозы в крови. Количество эритроцитов от кратковременного повышения инсулина не меняется."
+  },
+  {
+    "cat": "human",
+    "scenario": "Сравнили показатели при движении крови из мелких артерий в капиллярную сеть органа.",
+    "a": "Содержание гемоглобина в одном эритроците",
+    "b": "Скорость движения крови",
+    "ans": [
+      3,
+      2
+    ],
+    "exp": "Содержание гемоглобина в эритроците при переходе в капилляры не меняется. Скорость крови в капиллярах минимальна из-за большой суммарной площади их сечения."
+  },
+  {
+    "cat": "human",
+    "scenario": "Человеку ввели вакцину, после чего прошло достаточно времени для формирования специфического иммунного ответа.",
+    "a": "Количество клеток иммунологической памяти",
+    "b": "Количество хромосом в лимфоците",
+    "ans": [
+      1,
+      3
+    ],
+    "exp": "После вакцинации формируются клетки памяти. Но набор хромосом в соматических клетках, включая лимфоциты, не меняется."
+  },
+  {
+    "cat": "human",
+    "scenario": "Сравнили показатели тренированного спортсмена и нетренированного человека в состоянии покоя.",
+    "a": "Ударный объём сердца",
+    "b": "Частота сердечных сокращений в покое",
+    "ans": [
+      1,
+      2
+    ],
+    "exp": "У тренированного человека сердце за одно сокращение выбрасывает больше крови. Поэтому в покое ЧСС обычно ниже."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "В смешанную культуру бактерий, где большинство клеток чувствительны к антибиотику, а небольшая часть устойчива, добавили этот антибиотик.",
+    "a": "Общее число живых бактерий",
+    "b": "Доля устойчивых бактерий среди выживших",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "Чувствительные бактерии погибают или перестают размножаться, поэтому общее число живых клеток уменьшается. Среди выживших доля устойчивых возрастает."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Дрожжи перенесли в раствор глюкозы без доступа кислорода. Показатели сравнили с условиями без глюкозы.",
+    "a": "Выделение углекислого газа",
+    "b": "Образование этилового спирта",
+    "ans": [
+      1,
+      1
+    ],
+    "exp": "В анаэробных условиях при наличии глюкозы дрожжи проводят спиртовое брожение, образуются CO₂ и этанол."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Молочнокислые бактерии внесли в тёплое молоко и оставили на несколько часов при подходящей температуре.",
+    "a": "Содержание лактозы в среде",
+    "b": "Значение pH среды",
+    "ans": [
+      2,
+      2
+    ],
+    "exp": "Бактерии используют лактозу и образуют молочную кислоту. Поэтому лактозы становится меньше, а pH снижается."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Культуру бактерий перенесли из оптимальной температуры в холодную среду. Измерения провели вскоре после переноса.",
+    "a": "Скорость деления бактерий",
+    "b": "Число молекул ДНК в одной бактериальной клетке",
+    "ans": [
+      2,
+      3
+    ],
+    "exp": "Холод замедляет ферментативные реакции и деление. Но число молекул ДНК в отдельной клетке не обязано мгновенно измениться."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Культуру бактерий после периода голодания перенесли в свежую питательную среду с оптимальной температурой.",
+    "a": "Число кольцевых хромосом в одной бактериальной клетке в момент переноса",
+    "b": "Скорость деления культуры через некоторое время",
+    "ans": [
+      3,
+      1
+    ],
+    "exp": "В момент переноса число хромосом в клетке не меняется. В свежей питательной среде через некоторое время деление ускоряется."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Стерильный питательный раствор засеяли дрожжами и выдерживали при оптимальной температуре.",
+    "a": "Биомасса дрожжевой культуры",
+    "b": "Число хромосом в одной клетке дрожжей",
+    "ans": [
+      1,
+      3
+    ],
+    "exp": "Дрожжи размножаются, биомасса культуры возрастает. Хромосомный набор одной клетки при этом не становится другим."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "Культуру кишечной палочки нагрели до температуры пастеризации, а затем сравнили с культурой до нагревания.",
+    "a": "Количество живых клеток кишечной палочки",
+    "b": "Количество спор кишечной палочки",
+    "ans": [
+      2,
+      3
+    ],
+    "exp": "Пастеризация снижает число живых бактерий. Кишечная палочка не образует спор, поэтому их количество не изменяется и остаётся нулевым."
+  },
+  {
+    "cat": "microbes",
+    "scenario": "В культуре дрожжей закончилась глюкоза, но условия температуры и влажности остались прежними.",
+    "a": "Число хромосом в одной клетке дрожжей",
+    "b": "Интенсивность выделения углекислого газа при брожении",
+    "ans": [
+      3,
+      2
+    ],
+    "exp": "Хромосомный набор отдельной клетки не меняется. Без глюкозы брожение ослабевает, поэтому CO₂ выделяется меньше."
+  },
+  {
+    "cat": "energy",
+    "scenario": "В митохондриях заблокировали работу АТФ-синтазы, но перенос электронов по дыхательной цепи сначала продолжался.",
+    "a": "Скорость синтеза АТФ",
+    "b": "Концентрация протонов в межмембранном пространстве",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "Если АТФ-синтаза заблокирована, синтез АТФ снижается. Протоны хуже возвращаются в матрикс и накапливаются в межмембранном пространстве."
+  },
+  {
+    "cat": "energy",
+    "scenario": "В мышечной клетке при интенсивной работе возник дефицит кислорода.",
+    "a": "Интенсивность окислительного фосфорилирования",
+    "b": "Интенсивность анаэробного гликолиза",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "При нехватке O₂ окислительное фосфорилирование снижается. Для получения АТФ клетка сильнее использует анаэробный гликолиз."
+  },
+  {
+    "cat": "energy",
+    "scenario": "К ферменту добавили избыток субстрата, но до этого все активные центры фермента уже были заняты молекулами субстрата.",
+    "a": "Скорость ферментативной реакции",
+    "b": "Количество активных центров фермента",
+    "ans": [
+      3,
+      3
+    ],
+    "exp": "Если фермент уже насыщен субстратом, добавление субстрата не увеличит скорость реакции. Количество активных центров фермента тоже не меняется."
+  },
+  {
+    "cat": "energy",
+    "scenario": "Температуру ферментативной реакции повысили значительно выше оптимальной.",
+    "a": "Активность фермента",
+    "b": "Скорость образования продукта реакции",
+    "ans": [
+      2,
+      2
+    ],
+    "exp": "При температуре выше оптимума фермент может денатурировать, его активность падает. Поэтому продукт образуется медленнее."
+  },
+  {
+    "cat": "energy",
+    "scenario": "В одну пробирку поместили варёный картофель с пероксидом водорода, а в другую — сырой картофель с тем же количеством пероксида. Показатели второй пробирки сравнили с первой.",
+    "a": "Количество пероксида водорода через некоторое время",
+    "b": "Интенсивность выделения кислорода",
+    "ans": [
+      2,
+      1
+    ],
+    "exp": "В сыром картофеле активна каталаза, она разрушает пероксид водорода с выделением O₂. Поэтому пероксида остаётся меньше, а кислорода выделяется больше."
+  },
+  {
+    "cat": "energy",
+    "scenario": "К раствору фермента добавили субстрат, которого раньше не хватало, при этом фермент ещё не был насыщен.",
+    "a": "Количество фермент-субстратных комплексов",
+    "b": "Количество активных центров фермента",
+    "ans": [
+      1,
+      3
+    ],
+    "exp": "При добавлении недостающего субстрата образуется больше фермент-субстратных комплексов. Но число активных центров самого фермента не меняется."
+  },
+  {
+    "cat": "energy",
+    "scenario": "Температуру ферментативной реакции снизили значительно ниже оптимальной, но структуру фермента при этом не разрушили.",
+    "a": "Скорость ферментативной реакции",
+    "b": "Первичная структура фермента",
+    "ans": [
+      2,
+      3
+    ],
+    "exp": "Низкая температура замедляет движение молекул и скорость реакции. Первичная структура белка при обычном охлаждении не меняется."
+  },
+  {
+    "cat": "energy",
+    "scenario": "К изолированным митохондриям добавили АДФ при наличии кислорода и субстратов дыхания.",
+    "a": "Скорость синтеза АТФ",
+    "b": "Концентрация АДФ в среде после начала реакции",
+    "ans": [
+      1,
+      2
+    ],
+    "exp": "АДФ используется для синтеза АТФ, поэтому синтез АТФ возрастает, а концентрация АДФ после начала реакции уменьшается."
+  }
+];
+
+const CAT_LABELS = {
+  plants:"Растения",
+  human:"Человек и животные",
+  microbes:"Микроорганизмы",
+  energy:"Энергетический обмен / биохимия"
+};
+const CAT_CLASS = {
+  plants:"plants",
+  human:"human",
+  microbes:"microbes",
+  energy:"energy"
+};
+const CHOICE_TEXT = {
+  1:"1 — увеличится",
+  2:"2 — уменьшится",
+  3:"3 — не изменится"
+};
+
+let mode = "mini";
+let questions = [];
+let index = 0;
+let score = 0;
+let answers = [];
+let selected = {a:null,b:null};
+let checked = false;
+let student = "";
+
+const $ = (id)=>document.getElementById(id);
+
+document.querySelectorAll(".mode").forEach(el=>{
+  el.addEventListener("click",()=>{
+    document.querySelectorAll(".mode").forEach(m=>m.classList.remove("active"));
+    el.classList.add("active");
+    mode = el.dataset.mode;
+  });
+});
+
+$("showTheoryBtn").onclick = ()=> $("theoryScreen").classList.remove("hidden");
+$("hideTheoryBtn").onclick = ()=> $("theoryScreen").classList.add("hidden");
+$("sampleBtn").onclick = ()=> $("sampleBox").classList.toggle("hidden");
+$("startBtn").onclick = startQuiz;
+$("restartBtn").onclick = ()=> location.reload();
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function pickQuestions(){
+  const cats = ["plants","human","microbes","energy"];
+  if(mode === "full") return shuffle(BANK);
+  const per = mode === "mini" ? 3 : 6;
+  let out = [];
+  for(const c of cats){
+    out = out.concat(shuffle(BANK.filter(q=>q.cat===c)).slice(0,per));
+  }
+  return shuffle(out);
+}
+
+function startQuiz(){
+  student = $("studentName").value.trim() || "Ученик";
+  questions = pickQuestions();
+  index = 0; score = 0; answers = [];
+  $("startScreen").classList.add("hidden");
+  $("theoryScreen").classList.add("hidden");
+  $("topicCards").classList.add("hidden");
+  $("quizScreen").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  selected = {a:null,b:null};
+  checked = false;
+  const q = questions[index];
+  $("progressText").textContent = `Вопрос ${index+1} из ${questions.length}`;
+  $("roundText").textContent = CAT_LABELS[q.cat];
+  $("progressBar").style.width = `${Math.round(index/questions.length*100)}%`;
+  $("liveScore").textContent = `${score} / ${index}`;
+  $("questionBox").innerHTML = `
+    <span class="qtag ${CAT_CLASS[q.cat]}">${CAT_LABELS[q.cat]}</span>
+    <p class="tasktext">Проанализируйте описание опыта. Для каждого показателя выберите, как он изменится:</p>
+    <div class="scenario">${escapeHtml(q.scenario)}</div>
+    <table class="kim">
+      <thead><tr><th>Показатель</th><th>Варианты изменения</th></tr></thead>
+      <tbody>
+        <tr><td><b>А)</b> ${escapeHtml(q.a)}</td><td>1 — увеличится; 2 — уменьшится; 3 — не изменится</td></tr>
+        <tr><td><b>Б)</b> ${escapeHtml(q.b)}</td><td>1 — увеличится; 2 — уменьшится; 3 — не изменится</td></tr>
+      </tbody>
+    </table>
+    <div class="choiceGrid">
+      <div class="indicator">
+        <h3>А) ${escapeHtml(q.a)}</h3>
+        <div class="choiceBtns">
+          <button class="choice" data-part="a" data-value="1">1 — увеличится</button>
+          <button class="choice" data-part="a" data-value="2">2 — уменьшится</button>
+          <button class="choice" data-part="a" data-value="3">3 — не изменится</button>
+        </div>
+      </div>
+      <div class="indicator">
+        <h3>Б) ${escapeHtml(q.b)}</h3>
+        <div class="choiceBtns">
+          <button class="choice" data-part="b" data-value="1">1 — увеличится</button>
+          <button class="choice" data-part="b" data-value="2">2 — уменьшится</button>
+          <button class="choice" data-part="b" data-value="3">3 — не изменится</button>
+        </div>
+      </div>
+    </div>
+    <div class="answerPreview" id="answerPreview">Текущий ответ: <b>—</b></div>
+    <div id="feedbackBox"></div>
+    <div class="btnrow">
+      <button class="primary" id="checkBtn">Проверить</button>
+      <button class="secondary hidden" id="nextBtn">${index === questions.length-1 ? "Завершить" : "Следующий вопрос"}</button>
+      <button class="danger" id="finishEarlyBtn">Завершить сейчас</button>
+    </div>
+  `;
+  document.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      if(checked) return;
+      const part = btn.dataset.part;
+      const val = Number(btn.dataset.value);
+      selected[part] = val;
+      document.querySelectorAll(`.choice[data-part="${part}"]`).forEach(b=>b.classList.remove("selected"));
+      btn.classList.add("selected");
+      updatePreview();
+    });
+  });
+  $("checkBtn").onclick = checkAnswer;
+  $("nextBtn").onclick = nextQuestion;
+  $("finishEarlyBtn").onclick = finishQuiz;
+}
+
+function updatePreview(){
+  const a = selected.a || "—";
+  const b = selected.b || "—";
+  $("answerPreview").innerHTML = `Текущий ответ: <b>${a}${b}</b>`;
+}
+
+function checkAnswer(){
+  if(checked) return;
+  const q = questions[index];
+  if(!selected.a || !selected.b){
+    $("feedbackBox").innerHTML = `<div class="feedback no"><b>Выбери оба показателя:</b> А и Б.</div>`;
+    return;
+  }
+  checked = true;
+  const ok = selected.a === q.ans[0] && selected.b === q.ans[1];
+  if(ok) score++;
+  answers.push({q, user:[selected.a,selected.b], ok});
+  document.querySelectorAll(".choice").forEach(btn=>{
+    btn.disabled = true;
+    const part = btn.dataset.part;
+    const val = Number(btn.dataset.value);
+    const correct = part === "a" ? q.ans[0] : q.ans[1];
+    const chosen = part === "a" ? selected.a : selected.b;
+    if(val === correct) btn.classList.add("good");
+    else if(val === chosen) btn.classList.add("bad");
+  });
+  $("liveScore").textContent = `${score} / ${index+1}`;
+  $("feedbackBox").innerHTML = ok
+    ? `<div class="feedback ok"><b>Верно!</b> Ответ: <b>${q.ans.join("")}</b>.<br>${escapeHtml(q.exp)}</div>`
+    : `<div class="feedback no"><b>Неверно.</b> Твой ответ: <b>${selected.a}${selected.b}</b>. Правильный ответ: <b>${q.ans.join("")}</b>.<br>${escapeHtml(q.exp)}</div>`;
+  $("checkBtn").disabled = true;
+  $("nextBtn").classList.remove("hidden");
+  $("progressBar").style.width = `${Math.round((index+1)/questions.length*100)}%`;
+}
+
+function nextQuestion(){
+  if(!checked){
+    checkAnswer();
+    return;
+  }
+  index++;
+  if(index >= questions.length) finishQuiz();
+  else renderQuestion();
+}
+
+function finishQuiz(){
+  $("quizScreen").classList.add("hidden");
+  $("resultScreen").classList.remove("hidden");
+  const total = answers.length;
+  const percent = total ? Math.round(score/total*100) : 0;
+  $("resName").textContent = student;
+  $("resPercent").textContent = `${percent}%`;
+  $("resScore").textContent = `${score} из ${total}`;
+  $("resMode").textContent = `Режим: ${modeName(mode)} · ${new Date().toLocaleString("ru-RU")}`;
+  renderMistakes();
+  $("copyReportBtn").onclick = copyReport;
+  $("downloadReportBtn").onclick = downloadReport;
+}
+
+function renderMistakes(){
+  const box = $("mistakesBox");
+  if(!answers.length){
+    box.innerHTML = `<div class="mistake">Пока нет проверенных ответов.</div>`;
+    return;
+  }
+  box.innerHTML = answers.map((a,i)=>`
+    <div class="mistake">
+      <b>${i+1}. ${a.ok ? "✅" : "❌"} ${escapeHtml(CAT_LABELS[a.q.cat])}</b>
+      <div class="small muted">${escapeHtml(a.q.scenario)}</div>
+      <div>А) ${escapeHtml(a.q.a)} — правильно: <b>${CHOICE_TEXT[a.q.ans[0]]}</b></div>
+      <div>Б) ${escapeHtml(a.q.b)} — правильно: <b>${CHOICE_TEXT[a.q.ans[1]]}</b></div>
+      <div>Ответ: <b>${a.user.join("")}</b>; правильный: <b>${a.q.ans.join("")}</b></div>
+      <div class="small">${escapeHtml(a.q.exp)}</div>
+    </div>
+  `).join("");
+}
+
+function modeName(m){
+  return m === "mini" ? "мини-режим" : m === "standard" ? "стандарт" : "полная тренировка";
+}
+
+function makeReport(){
+  const now = new Date().toLocaleString("ru-RU");
+  const total = answers.length;
+  const percent = total ? Math.round(score/total*100) : 0;
+  const byCat = {};
+  Object.keys(CAT_LABELS).forEach(c=>byCat[c]={ok:0,total:0});
+  answers.forEach(a=>{byCat[a.q.cat].total++; if(a.ok) byCat[a.q.cat].ok++;});
+  let text = "";
+  text += `ОТЧЁТ ПО ТРЕНАЖЁРУ: ЕГЭ-2026 Биология, задание 2\n`;
+  text += `Тренажёр подготовила: Алина Исакова\n`;
+  text += `Имя: ${student}\n`;
+  text += `Дата и время: ${now}\n`;
+  text += `Режим: ${modeName(mode)}\n`;
+  text += `Итог: ${score} из ${total} (${percent}%)\n\n`;
+  text += `По блокам:\n`;
+  for(const c of Object.keys(CAT_LABELS)){
+    if(byCat[c].total) text += `- ${CAT_LABELS[c]}: ${byCat[c].ok}/${byCat[c].total}\n`;
+  }
+  text += `\nОтветы:\n`;
+  answers.forEach((a,i)=>{
+    text += `${i+1}. ${a.ok ? "ВЕРНО" : "ОШИБКА"} | ${CAT_LABELS[a.q.cat]}\n`;
+    text += `   Опыт: ${a.q.scenario}\n`;
+    text += `   А) ${a.q.a}; Б) ${a.q.b}\n`;
+    text += `   Ответ: ${a.user.join("")}\n`;
+    text += `   Правильный ответ: ${a.q.ans.join("")}\n`;
+    text += `   Пояснение: ${a.q.exp}\n`;
+  });
+  return text;
+}
+
+async function copyReport(){
+  const text = makeReport();
+  try{
+    await navigator.clipboard.writeText(text);
+    toast("Отчёт скопирован");
+  }catch(e){
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+    toast("Отчёт скопирован");
+  }
+}
+
+function downloadReport(){
+  const blob = new Blob([makeReport()], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const safeName = student.replace(/[^\p{L}\p{N}_-]+/gu,"_") || "uchenik";
+  a.href = url;
+  a.download = `otchet_zadanie_2_biologia_${safeName}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  toast("Отчёт скачан");
+}
+
+function toast(msg){
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1800);
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+</script>
+</body>
+</html>
